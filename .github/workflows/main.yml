@@ -1,0 +1,26 @@
+name: Issue Closed Webhook
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  send_webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Send Webhook
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_CREATOR: ${{ github.event.issue.user.login }}
+        run: |
+          # Construct JSON payload
+          payload='{"issueNumber":"'$ISSUE_NUMBER'","issueTitle":"'$ISSUE_TITLE'","issueCreator":"'$ISSUE_CREATOR'"}'
+          
+          # Send POST request to webhook URL
+          curl -X POST -H "Content-Type: application/json" -d "$payload" https://your-webhook-url.com
