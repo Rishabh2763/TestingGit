@@ -1,4 +1,4 @@
-name: Issue Closed Webhook
+name: Issue Closed 
 
 on:
   issues:
@@ -6,14 +6,14 @@ on:
       - closed
 
 jobs:
-  send_webhook:
+  send_Data:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Send Webhook
+      - name: Send dataToLocal
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
