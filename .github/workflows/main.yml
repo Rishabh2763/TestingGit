@@ -23,4 +23,4 @@ jobs:
           payload='{"issueNumber":"'$ISSUE_NUMBER'","issueTitle":"'$ISSUE_TITLE'","issueCreator":"'$ISSUE_CREATOR'"}'
           
           # Send POST request to webhook URL
-          curl -X POST -H "Content-Type: application/json" -d "$payload" https://your-webhook-url.com
+          curl -X POST -H "Content-Type: application/json" -d "$payload" http://localhost:5000/webHooks
